@@ -29,7 +29,7 @@ io.sockets.on('connection', function (client) {
 				});
 				taps.on('end', function() {
 			    	is_connected = false;
-			    	console.log('Tapestries server disconnected')
+			    	console.log('Server disconnected')
 				});
 			}			
 		}
@@ -53,7 +53,7 @@ http.createServer(function (request, response) {
  
     console.log('request starting...');
      
-    var filePath = './TapsJS/WebContent' + request.url;
+    var filePath = '../client' + request.url;
     if (request.url == '/')
         filePath += '/index.html';
     
