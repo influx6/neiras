@@ -1,0 +1,54 @@
+@CHARSET "ISO-8859-1";
+@font-face {
+    font-family: DejaVu;
+    src: url(DejaVuSansMono.ttf);
+    font-weight:400;
+}
+
+body {
+	padding:0;
+	margin:0;
+	background:#fff;
+	overflow-y:scroll;
+	overflow-x:hidden;
+	font-family: DejaVu, "Courier New", Courier, monospace;
+	font-size: 10pt;
+}
+
+
+p {
+	padding:0;
+	margin:0;
+	white-space:pre;
+}
+
+p.wrap {
+	white-space:pre-wrap;
+	text-indent: -1.2em;
+	padding-left: 1.2em;	
+}
+
+
+.room_name {
+	margin-top: 0.5em;
+	font-weight:bold;
+	color: #37375e;
+}
+
+.server_message {
+	color: #c0c0c0;
+}
+
+.error {
+	color: red;
+}
+
+.info, .looked {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+	color: #404040;
+}
+
+.looked .name {
+	color: #20a000;
+}

@@ -1,0 +1,53 @@
+<!DOCTYPE html>  
+<html>  
+<head>
+<meta charset="utf-8">
+<script src="js/jquery-1.5.2.min.js"></script>
+<script src="http://127.0.0.1:8081/socket.io/socket.io.js"></script>
+<script src="js/loader.js"></script>
+<script src="js/tapsjs.js"></script> 
+<script src="js/action.js"></script>
+<script src="js/trigger.js"></script>
+<script src="js/event.js"></script>
+<script src="js/socket.js"></script> 
+<script src="js/chat.js"></script> 
+<script src="js/log.js"></script>
+<script src="js/data.js"></script>
+<script src="js/page.js"></script>
+<script src="js/panel.js"></script>
+<script type="text/javascript" language="javascript"> 
+//<![CDATA[ 
+$(document).ready( function(){
+	initTapsJS('tapestries.fur.com:2069', '127.0.0.1:8081'); // Should be the same as the socket.io.js script above
+});
+//]]> 
+</script> 
+
+<link rel="stylesheet" type="text/css" href="css/style.css" /> 
+<title>Neira's</title>
+  
+</head>  
+<body>
+	<div id="wrapper">
+	
+		<div id="leftCol"><div class="box"><div id="neiras"></div><div class="frame"></div><div class="tabs"></div><div class="c"><div class="panel"></div></div></div></div><div id="mainCol">
+	  		<div id="chatBox" class="box">
+		  		<div class="frame"></div>
+		  		<div class="c">
+					<div id="chat"></div>
+				</div>
+		  	</div>
+		  	 
+			<div id="logContainer">
+		  		<div id="logBox" class="box" >
+		  			<div class="frame"></div>
+					<div class="c">
+						<div id="log"></div>
+			 		</div>
+			  	</div>
+			</div>
+					
+		</div><div id="rightCol"><div class="box"><div class="frame"></div><div class="tabs"></div><div class="c"><div class="panel"></div></div></div></div>
+	</div>
+</body>  
+</html>
