@@ -1,0 +1,40 @@
+Thanks for trying out my client!
+
+How to start it:
+First you need to start your own private Tapestries proxy/Webserver.
+Run StartProxy.bat
+Done!
+
+Next you open up your favorite Web browser. This should be Chrome (I haven't tried it on any other browser)
+
+In the adress field, type:
+http://localhost:8125
+
+Now you can use it as any other client. Have fun!
+
+Features:
+* Capturing of commands such as look, wi, ws and wf, placing information in left and right panels
+* Automatic updating of the list of furs in the room ('ws' list).
+* If you want to update the Watchfor list, type 'wf'
+* Chat history (CTRL+Up or CTRL+Down)
+* Name Tab-completion. Instead of typing CthulhuSpwn,
+  you can simply type Ct+Tab and it completes the name.
+  The function uses the ws and wf list of names.
+* Multiple connections on multiple browser tabs
+
+New commands:
+hide (Hides all text)
+show (shows all text again)
+show [name] (Kind of like "look [name]", but will only use stored character data. If you have once looked at someone, you can use show next time without the character)
+reset (If the client goes haywire, spitting out wierd text, use this command to put things in order)
+
+Just be aware that this is not even a Beta. It is Alpha.
+Many features are missing and others are not completed.
+But, it is still rather neat I think.
+
+So, if you connect using the client, make sure to page/page #mail Neira (me!) and drop a comment.
+
+*Hugs*
+
+/Neira
+
