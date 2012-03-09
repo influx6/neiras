@@ -2,7 +2,7 @@ Thanks for trying out my client!
 
 How to start it:
 First you need to start your own private Tapestries proxy/Webserver.
-Run StartProxy.bat
+Run StartProxy.bat which can be found in the "proxy"-folder
 Done!
 
 Next you open up your favorite Web browser. This should be Chrome (I haven't tried it on any other browser)
