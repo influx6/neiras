@@ -1,3 +1,45 @@
+ var f_look = function(msg) {
+	var match = msg.match(/^(look|l)\s+([^\s]+)$/);
+	
+	if (match == null)
+		return false;
+	
+	if (Data.room.contents.indexOf(match[2].toLowerCase()) == -1 )
+		return false;
+	
+	var startCode = Event.generateCode();
+	var endCode = Event.generateCode();
+	
+	Socket.send('tp '+startCode+Socket.EOL+msg+Socket.EOL+'tp '+endCode);
+	
+	Event.append( new lookCharEvent(match[2], startCode, endCode, {log:true}) );
+};
+
+Trigger.beginsWith.look = f_look;
+Trigger.beginsWith.l = f_look;
+
+
+// This trigger doesn't really belong in lookChar since it requires no parsing.
+// But it atleast utilizes the parsed information from previous looks
+Trigger.beginsWith.show = function(msg) {
+	var match = msg.match(/^show\s+([^\s]+)$/);
+	
+	if (match == null) {
+		Log.add($(document.createElement('p')).addClass('info').text('Syntax: show [name]'));
+		return true;
+	}
+	
+	var charid = $.trim(match[1].toLowerCase());
+	if (!Data.chars[charid] ) {
+		Log.add($(document.createElement('p')).addClass('info').text('Unable to find '+match[1]));
+		return true;
+	}
+	
+	Page.character.update(charid);
+	leftPanel.setActive('character');
+	return true;
+};
+
 function lookCharEvent(char, startCode, endCode, options) {
 	this.char = char;
 	this.startCode = startCode;

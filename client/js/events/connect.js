@@ -1,3 +1,17 @@
+// Triggers
+Trigger.beginsWith.connect = function(msg) {
+	// Getting username and password
+	var match = msg.match(/^connect\s+([^\s]*)\s+(.*)$/);
+	
+	// No match? Then no trigger will be done
+	if( match == null )
+		return false;
+	
+	Event.append( new connectEvent(match) );
+	
+	return msg;
+};
+
 function connectEvent(match) {
 	this.match = match;
 }

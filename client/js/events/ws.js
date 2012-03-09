@@ -1,3 +1,27 @@
+// Trigger
+Trigger.singleWord.ws = function(msg) {
+	rightPanel.setActive('inRoom');
+	Event.append( new wsEvent() );
+	return msg;
+};
+
+Trigger.beginsWith.ws = function(msg) {
+	var m = msg.match(/^[^\s]+\s+(.*)$/);
+	var p = m[1].split(/\s+/);
+	
+	if( p[0] == '#far' ) {
+		Event.append( new wsEvent({far: true, log:true}) );
+		return msg;
+	}
+	
+	// Another #help command?
+	if( p[0].match(/^#/) )
+		return false;
+	
+	Event.append( new wsEvent({log:true}) );
+	return msg;
+};
+
 function wsEvent(options) {
 	this.options = options || {};
 	this.myself = false;

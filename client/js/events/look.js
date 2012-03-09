@@ -1,3 +1,21 @@
+// Triggers
+Trigger.singleWord.home = function(msg) {
+	Event.append( new ignoreEvent(4) );
+	Log.add( $(document.createElement('p')).addClass('info').text('You wake up back at home') );
+	Event.append( new lookEvent() );
+	
+	return msg;		
+};
+
+Trigger.beginsWith.tp = function(msg) {
+	if ( msg.match(/^tp\s+\#/) )
+		return false;
+
+	Event.append( new lookEvent('tport') );
+	return msg;		
+};
+
+
 function lookEvent(state, options) {
 	if (state) this.state = state;
 	this.options = options || {};

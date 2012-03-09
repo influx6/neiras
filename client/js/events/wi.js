@@ -1,3 +1,12 @@
+// Triggers
+Trigger.beginsWith.wi = function(msg) {
+	if (msg.match(/^[^\s]+\s+#/) )
+		return false;
+	
+	Event.append( new wiEvent() );
+	return msg;			
+};
+
 function wiEvent(options) {
 	this.options = options || {};
 	this.charid = null;

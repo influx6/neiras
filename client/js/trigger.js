@@ -68,27 +68,7 @@ var Trigger = {
 			Log.$body.toggle(true);
 			leftPanel.show();
 			rightPanel.show();
-		},
-		home:	function(msg) {
-			Event.append( new ignoreEvent(4) );
-			Log.add( $(document.createElement('p')).addClass('info').text('You wake up back at home') );
-			Event.append( new lookEvent() );
-			
-			return msg;		
-		},
-		
-		ws:		function(msg) {
-			rightPanel.setActive('inRoom');
-			Event.append( new wsEvent() );
-			return msg;
-		},
-		
-		wf:		function(msg) {
-			rightPanel.setActive('watchfor');
-			Event.append( new wfEvent() );
-			return msg;
-		},
-		
+		},		
 		reset:	function(msg) {
 			Event.clear();
 			Log.add($(document.createElement('p')).addClass('info').text('Clearing event pipe') );
@@ -100,87 +80,6 @@ var Trigger = {
 	},
 	
 	beginsWith: {
-		connect: function(msg) {
-			// Getting username and password
-			var match = msg.match(/^connect\s+([^\s]*)\s+(.*)$/);
-			
-			// No match? Then no trigger will be done
-			if( match == null )
-				return false;
-			
-			Event.append( new connectEvent(match) );
-			
-			return msg;
-		},
-		
-		tp: function(msg) {
-			
-			if ( msg.match(/^tp\s+#/) )
-				return false;
-			
-			Event.append( new lookEvent('tport') );
-			return msg;		
-		},
-		
-		look: function(msg) {
-			var match = msg.match(/^look\s+([^\s]+)$/);
-			
-			if (match == null)
-				return false;
-			
-			if (Data.room.contents.indexOf(match[1].toLowerCase()) == -1 )
-				return false;
-			
-			var startCode = Event.generateCode();
-			var endCode = Event.generateCode();
-			
-			Socket.send('tp '+startCode+Socket.EOL+msg+Socket.EOL+'tp '+endCode);
-			
-			Event.append( new lookCharEvent(match[1], startCode, endCode, {log:true}) );
-		},
-		
-		show: function(msg) {
-			var match = msg.match(/^show\s+([^\s]+)$/);
-			
-			if (match == null) {
-				Log.add($(document.createElement('p')).addClass('info').text('Syntax: show [name]'));
-				return true;
-			}
-			
-			var charid = $.trim(match[1].toLowerCase());
-			if (!Data.chars[charid] ) {
-				Log.add($(document.createElement('p')).addClass('info').text('Unable to find '+match[1]));
-				return true;
-			}
-			
-			Page.character.update(charid);
-			leftPanel.setActive('character');
-			return true;
-		},
-		
-		wi: function(msg) {
-			if (msg.match(/^[^\s]+\s+#/) )
-				return false;
-			
-			Event.append( new wiEvent() );
-			return msg;			
-		},
-				
-		ws:	function(msg) {
-			var m = msg.match(/^[^\s]+\s+(.*)$/);
-			var p = m[1].split(/\s+/);
-			
-			if( p[0] == '#far' ) {
-				Event.append( new wsEvent({far: true, log:true}) );
-				return msg;
-			}
-			
-			// Another #help command?
-			if( p[0].match(/^#/) )
-				return false;
-			
-			Event.append( new wsEvent({log:true}) );
-			return msg;
-		}
+
 	}
 };

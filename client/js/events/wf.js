@@ -1,3 +1,10 @@
+// Trigger
+Trigger.singleWord.wf =	function(msg) {
+	rightPanel.setActive('watchfor');
+	Event.append( new wfEvent() );
+	return msg;
+};
+
 function wfEvent() {}
 
 wfEvent.prototype.state = 'headers';
