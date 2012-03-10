@@ -16,7 +16,8 @@ Loader = {
 	    'serverMessage',
 	    'lookChar',
 	    'pose',
-	    'reset'
+	    'reset',
+	    'focus'
 	],
 	
 	// Loads all the events listed in eventLoader.events

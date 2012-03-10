@@ -6,7 +6,7 @@
 }
 
 body {
-	padding:0;
+	padding:0 0 0 11px;
 	margin:0;
 	background:#fff;
 	overflow-y:scroll;
@@ -51,4 +51,12 @@ p.wrap {
 
 .looked .name {
 	color: #20a000;
+}
+
+.focus {
+	position:relative;
+	left:-11px;
+	margin-right:-11px;
+	padding-left:11px;
+	background-color: #e8e8ff; /* Red: #ffe8e8; */
 }
