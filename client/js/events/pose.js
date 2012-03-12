@@ -39,7 +39,7 @@ poseEvent.prototype.callback = function($p) {
 		Event.append( new wsEvent({single:true}) );
 	}
 	
-	if( mode != false ) {
+	if( mode !== false ) {
 		var lc = m[1].toLowerCase();
 				
 		var $span = $(document.createElement('span'))
@@ -60,7 +60,7 @@ poseEvent.prototype.callback = function($p) {
 		$p
 			.text(pre)
 			.append($span)
-			.append( mid+m[2]+post )
+			.append( mid + m[2] + post )
 			.addClass('char_'+lc+mode);	
 				
 	}
