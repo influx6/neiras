@@ -17,15 +17,17 @@ body {
 
 
 p {
-	padding:0;
-	margin:0;
+	position:relative;
+	left:-11px;
+	padding:0 0 0 11px;
+	margin:0 -11px 0 0;
 	white-space:pre;
 }
 
 p.wrap {
 	white-space:pre-wrap;
 	text-indent: -1.2em;
-	padding-left: 1.2em;	
+	padding-left: 2.2em;	
 }
 
 
@@ -53,10 +55,10 @@ p.wrap {
 	color: #20a000;
 }
 
-.focus {
-	position:relative;
-	left:-11px;
-	margin-right:-11px;
-	padding-left:11px;
-	background-color: #e8e8ff; /* Red: #ffe8e8; */
+.focus, .focus.blue {
+	background-color: #e8e8ff;
 }
+
+.focus.red { background-color: #ffe8e8; }
+
+.focus.green { background-color: #e8ffe8; }

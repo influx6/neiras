@@ -27,6 +27,8 @@ hide (Hides all text)
 show (shows all text again)
 show [name] (Kind of like "look [name]", but will only use stored character data. If you have once looked at someone, you can use show next time without the character)
 reset (If the client goes haywire, spitting out wierd text, use this command to put things in order)
+focus [name] (Turns on highlighting on that character)
+unfocus [name] (Removed highlighting on that character)
 
 Just be aware that this is not even a Beta. It is Alpha.
 Many features are missing and others are not completed.
