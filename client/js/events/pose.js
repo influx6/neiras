@@ -7,7 +7,7 @@ poseEvent.prototype.callback = function($p) {
 	var mode = false;
 	var pre = '';
 	var mid = '';
-	var pos = '';
+	var post = '';
 	
 	if( m = text.match(/In a page-pose to you, ([^ ,']+)(.*)$/) ) {
 		mode = ' page';
