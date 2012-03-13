@@ -62,3 +62,5 @@ p.wrap {
 .focus.red { background-color: #ffe8e8; }
 
 .focus.green { background-color: #e8ffe8; }
+
+.whisper, .page { font-style:italic }
