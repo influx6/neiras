@@ -150,6 +150,10 @@ function initTapsJS(mServer, ioServer) {
 		Log.init();
 		initPanels();
 		
+		window.onbeforeunload = function() { 
+			if( Data.connected )
+				return 'You are still connected';
+		};
 		
 		Socket.connect(mServer, ioServer);
 		

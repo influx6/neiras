@@ -52,9 +52,9 @@ var Trigger = {
 	},
 	
 	singleWord: {
-		quit:	function(msg) { return 'QUIT'; },
-		exit:	function(msg) { return 'QUIT'; },
-		logout:	function(msg) { return 'QUIT'; },
+		quit:	function(msg) { Data.connected=false; return 'QUIT'; },
+		exit:	function(msg) { Data.connected=false; return 'QUIT'; },
+		logout:	function(msg) { Data.connected=false; return 'QUIT'; },
 		hide:	function(msg) {
 			Log.$body.toggle(false);
 			leftPanel.hide();

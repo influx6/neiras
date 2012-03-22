@@ -9,7 +9,7 @@ var Socket = {
 		this.host = 'ws://' + ioServer;
 		
 		try{  
-			Socket.io = io.connect(Socket.host);
+			Socket.io = io.connect(Socket.host, {'sync disconnect on unload':false} );
 			
 			Log.write('<p class="event">Socket Status: '+Socket.io.readyState+'</p>');  
 			
