@@ -55,10 +55,6 @@ var Trigger = {
 		quit:	function(msg) { return 'QUIT'; },
 		exit:	function(msg) { return 'QUIT'; },
 		logout:	function(msg) { return 'QUIT'; },
-		look:	function(msg) {
-			Event.append( new lookEvent() );
-			return msg;
-		},
 		hide:	function(msg) {
 			Log.$body.toggle(false);
 			leftPanel.hide();
@@ -68,14 +64,13 @@ var Trigger = {
 			Log.$body.toggle(true);
 			leftPanel.show();
 			rightPanel.show();
-		},		
-		reset:	function(msg) {
-			Event.clear();
-			Log.add($(document.createElement('p')).addClass('info').text('Clearing event pipe') );
-			var endCode = Event.generateCode();
-			Event.append( new resetEvent(endCode) );
-			Socket.send('tp '+endCode);
-		}
+		},
+		debug:	function(msg) {
+			if( DEBUG ) {
+				Log.$iframe.toggle();
+				Log.$debug.toggle();
+			}
+		},
 		
 	},
 	

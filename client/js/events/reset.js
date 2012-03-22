@@ -1,14 +1,13 @@
-// IGNORE event
+Trigger.singleWord.reset = function(msg) {
+	Event.clear();
+	Event.append( new resetEvent(endCode) );
+};
+
 function resetEvent(endCode) {
 	this.endCode = endCode;
 }
-resetEvent.prototype.callback = function($p) {
-		
-	if (!Event.isCode($p.text(), this.endCode)) {
-		Log.add($p);
-		return true;
-	}
-	
-	Log.add($(document.createElement('p')).addClass('info').text('Event pipe cleared'));	
-	return;
+
+resetEvent.prototype.finish = function() {
+	Log.add($(document.createElement('p')).addClass('info').text('Event pipe cleared'));
 };
+resetEvent.prototype.callback = function($p) {};

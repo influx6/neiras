@@ -8,9 +8,9 @@ serverMessageEvent.prototype.callback = function($p) {
 		Log.add($p);
 
 		Event.inactiveTimer(200);
-		return true;
+		return eRet.Partly;
 	}
 	
-	return false;
+	return eRet.Pass;
 			
 };

@@ -10,12 +10,12 @@ ignoreEvent.prototype.callback = function($p) {
 		
 		Log.add($p);
 		if (this.count == 0)
-			return;
+			return eRet.Complete;
 		
-		return true;
+		return eRet.Partly;
 	}
 	
-	return false;
+	return eRet.Pass;
 };
 
 
@@ -31,34 +31,34 @@ deleteEvent.prototype.callback = function($p) {
 	if ( this.count-- ) {
 		
 		if (this.count == 0)
-			return;
+			return eRet.Complete;
 		
-		return true;
+		return eRet.Partly;
 	}
 	
-	return false;
+	return eRet.Pass;
 };
 
 // IDLE event
-function ignoreEvent(count) {
+function idleEvent(count) {
 	if ( typeof count != 'undefined' )
 		this.count = count;
 }
 
-ignoreEvent.prototype.count = 1;
-ignoreEvent.prototype.callback = function($p) {
+idleEvent.prototype.count = 1;
+idleEvent.prototype.callback = function($p) {
 	
 	if ( this.count-- ) {
 		
 		Event.prepend(this);
 		Event.prepend(new idleEvent());
-		return false;
+		return eRet.Pass;
 		
 		if (this.count == 0)
-			return;
+			return eRet.Complete;
 		
-		return true;
+		return eRet.Partly;
 	}
 	
-	return false;
+	return eRet.Pass;
 };

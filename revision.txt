@@ -1,2 +1,9 @@
-Revision: 1
-Date: 2012-03-13
+Revision: 2
+Date: 2012-03-22
+
+Revision 2 (2012-03-13):
+Remade the Event code system so that it will automatic handle codes, storing them in the event.initCode and event.finishCode.
+This will be activated if event.init() and/or event.finish() is set. These functions will be called on the arrival of the codes in the log.
+Also, an Event Debug-mode has been added. It is actived/deactivated by the command 'debug' in the chat window.
+The debug window will show all incoming text, very much like a pure Telnet-client, but grouped by how the Event system has handled the text.
+Mouse-over the text will show what eventHandler has dealt with the line and what state the event is in currently.  

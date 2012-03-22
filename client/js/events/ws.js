@@ -38,7 +38,7 @@ wsEvent.prototype.callback = function($p) {
 		if( !text.match(/^Name____________/) ) {
 			Event.prepend(this);
 			Event.prepend(new idleEvent());
-			return false;
+			return eRet.Pass;
 		}
 		
 		if( !this.options.far && (!this.options.single || !Data.room.contents) )
@@ -47,7 +47,7 @@ wsEvent.prototype.callback = function($p) {
 		this.state = 'chars';
 		if( this.options.log )
 			Log.add($p);
-		return true;
+		return eRet.Partly;
 	
 	case 'chars':
 		var match;
@@ -63,7 +63,7 @@ wsEvent.prototype.callback = function($p) {
 			
 			if( this.options.log )
 				Log.add($p);
-			return;
+			return eRet.Complete;
 		}
 		
 		if (this.options.single && !this.options.far) {
@@ -79,7 +79,7 @@ wsEvent.prototype.callback = function($p) {
 				
 				if( this.options.log )
 					Log.add($p);
-				return true;
+				return eRet.Partly;
 			}
 		}
 		
@@ -126,7 +126,7 @@ wsEvent.prototype.callback = function($p) {
 		
 		if( this.options.log )
 			Log.add($p);
-		return true;
+		return eRet.Partly;
 	}
 	
 };

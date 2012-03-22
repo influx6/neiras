@@ -35,8 +35,7 @@ poseEvent.prototype.callback = function($p) {
 	}
 	else if( m = text.match(/^([^ ,']+)(.*)$/) ) {
 		mode = '';
-		Socket.send('ws ' + m[1]);
-		Event.append( new wsEvent({single:true}) );
+		Event.append( new wsEvent({single:true}) , 'ws ' + m[1]);
 	}
 	
 	if( mode !== false ) {

@@ -16,6 +16,15 @@ var Log = {
 		Log.$iframe = $('#log');
 		Log.$body = Log.$iframe.contents().find('body');
 		
+		if( DEBUG ) {
+			Log.$iframe.after( $(document.createElement("div"))
+				.attr('id', 'debug')
+				.hide()
+			);
+			
+			Log.$debug = $('#debug');
+		}
+			
 		Log.calcWidth();
 		
 	},
@@ -64,7 +73,7 @@ var Log = {
 			
 			Log.incompleteLine = '';
 			
-			// Sending the line to the trigger parser
+			// Sending the line to the event parser
 			Event.parse($p);	
 		});
 		

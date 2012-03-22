@@ -15,25 +15,24 @@ wfEvent.prototype.callback = function($p) {
 	switch(this.state) {
 	case 'headers':
 		if( text.match(/^No one that you are watching for is online.$/m) )
-			return;
+			return eRet.Complete;
 		
 		if( !text.match(/^Players online for whom you are watching:/) )
-			return false;
+			return eRet.Pass;
 		
 		Data.watchfor = [];
 		this.state = 'chars';
-		return true;
+		return eRet.Partly;
 	
 	case 'chars':
 		
 		if( text.match(/^Done./) ) {
 			// We get a ws right after to get more info to the watchfor list
 			if( Data.watchfor.length > 0 ) {
-				Socket.send('ws #far ' + Data.watchfor.join(' '));
-				Event.append( new wsEvent({far: true}) );
+				Event.append( new wsEvent({far: true}), 'ws #far ' + Data.watchfor.join(' ') );
 			}
 			Page.watchfor.update();
-			return;
+			return eRet.Complete;
 		}
 		
 		var names = $.trim(text).split(/ +/);
@@ -51,7 +50,7 @@ wfEvent.prototype.callback = function($p) {
 			
 		});
 		
-		return true;
+		return eRet.Partly;
 	}
 	
 };

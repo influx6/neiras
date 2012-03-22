@@ -1,3 +1,5 @@
+var DEBUG = true;
+
 $.ctrl = function(key_code, callback, args) {
     $(document).keydown(function(e) {
         if(!args) args=[]; // IE barks when args is null

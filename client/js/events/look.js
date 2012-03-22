@@ -7,24 +7,41 @@ Trigger.singleWord.home = function(msg) {
 	return msg;		
 };
 
+Trigger.singleWord.look = function(msg) {
+	Event.append( new lookEvent(), msg);
+};
+
 Trigger.beginsWith.tp = function(msg) {
 	if ( msg.match(/^tp\s+\#/) )
 		return false;
 
-	Event.append( new lookEvent('tport') );
-	return msg;		
+	Event.append( new lookEvent('tport'), msg);
 };
 
 
 function lookEvent(state, options) {
 	if (state) this.state = state;
 	this.options = options || {};
+	
+	
+	if( this.options.connect ) {
+		this.finishCode = Event.generateCode();
+		Socket.send('tp ' + this.finishCode);
+	}
 }
 
 lookEvent.prototype.state = 'title';
 lookEvent.prototype.ignore = [
 	// 'You step out of the teleport booth.'
 ];
+
+lookEvent.prototype.finish = function() {
+	Page.room.update();
+	leftPanel.setActive('room');
+	
+	Event.append( new wsEvent(), 'ws' );
+	
+};
 
 lookEvent.prototype.callback = function($p) {
 	
@@ -41,16 +58,16 @@ lookEvent.prototype.callback = function($p) {
 			// Is it one of the Ignore-lines?
 			if ( text.match(/^You /) ) {
 				Log.add($p.addClass('info'));
-				return true;
+				return eRet.Partly;
 			}
 			else if ( this.ignore.indexOf(text) != -1 ) {
 				Log.add($p.addClass('info'));
-				return true;
+				return eRet.Partly;
 			}
 			
 			// We get a ws right after
-			Socket.send('ws');
-			Event.append( new wsEvent() );
+			//Socket.send('ws');
+			//Event.append( new wsEvent(), 'ws' );
 			
 			Data.room = {
 				name: text,
@@ -61,7 +78,7 @@ lookEvent.prototype.callback = function($p) {
 	
 			Log.add( $p.addClass('room_name'));
 			this.state = 'desc';
-			return true;			
+			return eRet.Partly;			
 		
 		case 'desc':			
 			// Test if the description is complete and we have reached the Exits-list
@@ -76,19 +93,13 @@ lookEvent.prototype.callback = function($p) {
 				break;
 			}
 	
-			
-			if( text.match(/^Name____________/) ) {
-				Page.room.update();			
-				return false;
-			}
-			
 			// Adding the line to the room description
 			if ( text.length > Log.charWidth ) {
 				$p.addClass('wrap');
 			}
 			Data.room.desc.push($p[0]);
 			
-			return true;
+			return eRet.Partly;
 			
 		case 'exits':
 			var exits = match[1].split(', ');
@@ -111,28 +122,17 @@ lookEvent.prototype.callback = function($p) {
 			
 			// If we have the exits, then we are done with the description.
 			// Time to update the Room-page
-			Page.room.update();
-			leftPanel.setActive('room');
 			
 			Log.add($p);
 			this.state = 'contents_head';
 			
-			Event.inactiveTimer(300);
-			return true;
+			return eRet.Partly;
 					
 		case 'contents_head':
 			if( text.match(/^Contents:$/) ) {
 				this.state = 'contents';
-				// If we retrieve an empty list, let's update the inRoom-page
-				Event.inactiveTimer(500, function() {
-					Page.inRoom.update();		
-				});
-				return true;
-			}
-			
-			if( text.match(/^Name____________/) ) {
-				Page.room.update();			
-				return false;
+				
+				return eRet.Partly;
 			}
 			
 			// No Contents head? We check if we have some post-contents (such as Sign-info and so)
@@ -142,26 +142,13 @@ lookEvent.prototype.callback = function($p) {
 	
 		case 'contents':
 			
-			// Server-messages are always last (I think).
-			if( text.match(/^#/) ) {
-				Page.inRoom.update();
-				if( this.options.connect ) {
-					Event.prepend( new wfEvent() );
-				}
-				Event.prepend( new serverMessageEvent() );
-				return false;
-			}
 			
-			if( text.match(/^Name____________/) ) {
-				Page.room.update();			
-				return false;
-			}
-			// If a single space exists, it is not a name. We return false
-			if( text.match(/ /) ) {
+			// Server-messages are always last (I think).
+			if( text.match(/^#/) || text.match(/ /) ) {
 				rerun = 'post_contents';
 				break;
-			}	
-			
+			}
+				
 			var charid = $.trim(text).toLowerCase();
 			
 			if( !Data.chars[charid] )
@@ -173,28 +160,21 @@ lookEvent.prototype.callback = function($p) {
 				Page.inRoom.update();				
 			});
 			
-			return true;
+			return eRet.Partly;
 			
 		case 'post_contents':
 			
-			if( text.match(/^Name____________/) ) {
-				Page.room.update();			
-				return false;
-			}
 			
 			// Server-messages are always last (I think).
 			if( text.match(/^#/) ) {
+				Event.prepend(this);
 				Page.inRoom.update();
 				if( this.options.connect ) {
 					Event.prepend( new wfEvent() );
 				}
 				Event.prepend( new serverMessageEvent() );
-				return false;
+				return eRet.Pass;
 			}
-			
-			Event.inactiveTimer(500);
-			
-				
 			
 			// Adding the line to the room description
 			if ( text.length > Log.charWidth ) {
@@ -202,7 +182,7 @@ lookEvent.prototype.callback = function($p) {
 			}
 			Data.room.desc.push($p[0]);
 			
-			return true;
+			return eRet.Partly;
 		
 		case 'tport':
 			
@@ -212,7 +192,7 @@ lookEvent.prototype.callback = function($p) {
 			else {
 				Log.add( $p.addClass('info') );
 				this.state = 'title';
-				return true;
+				return eRet.Partly;
 			}
 		
 		}

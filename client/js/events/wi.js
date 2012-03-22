@@ -21,14 +21,12 @@ wiEvent.prototype.callback = function($p) {
 	switch(this.state) {
 	case 'headers':
 		// wi is a persistent event.
-		if( !text.match(/^-- WhatIsZ Extended/) ) {
-			Event.prepend(this);
-			Event.prepend(new idleEvent());
-			return false;
-		}
+		if( !text.match(/^-- WhatIsZ Extended/) )
+			return eRet.Idle;
+		
 		 
 		this.state = 'chars';
-		return true;
+		return eRet.Partly;
 	
 	case 'chars':
 		var match;

@@ -4,15 +4,10 @@
 	if (match == null)
 		return false;
 	
-	if (Data.room.contents.indexOf(match[2].toLowerCase()) == -1 )
-		return false;
+	//if (Data.room.contents.indexOf(match[2].toLowerCase()) == -1 )
+	//	return false;
 	
-	var startCode = Event.generateCode();
-	var endCode = Event.generateCode();
-	
-	Socket.send('tp '+startCode+Socket.EOL+msg+Socket.EOL+'tp '+endCode);
-	
-	Event.append( new lookCharEvent(match[2], startCode, endCode, {log:true}) );
+	Event.append( new lookCharEvent(match[2], {log:false}), msg );
 };
 
 Trigger.beginsWith.look = f_look;
@@ -20,7 +15,7 @@ Trigger.beginsWith.l = f_look;
 
 
 // This trigger doesn't really belong in lookChar since it requires no parsing.
-// But it atleast utilizes the parsed information from previous looks
+// But it at least utilizes the parsed information from previous looks
 Trigger.beginsWith.show = function(msg) {
 	var match = msg.match(/^show\s+([^\s]+)$/);
 	
@@ -40,15 +35,14 @@ Trigger.beginsWith.show = function(msg) {
 	return true;
 };
 
-function lookCharEvent(char, startCode, endCode, options) {
+function lookCharEvent(char, options) {
 	this.char = char;
-	this.startCode = startCode;
-	this.endCode = endCode;
 	this.id = $.trim(char).toLowerCase();
 	this.options = options || {};
 }
 
-lookCharEvent.prototype.state = 'code';
+lookCharEvent.prototype.state = 'first';
+lookCharEvent.prototype.init = true;
 lookCharEvent.prototype.finish = function() {
 	if( !this.id ) return;
 	
@@ -71,29 +65,25 @@ lookCharEvent.prototype.callback = function($p) {
 		rerun = false;
 	
 		switch(this.state) {
-		case 'code':
-			// lookChar is a persistent event, waiting for the startCode.
-			if (!Event.isCode(text, this.startCode)) {
-				Event.prepend(this);
-				Event.prepend(new idleEvent());
-				return false;
-			}
-			this.state = 'first';
-			return true;
-			
 		case 'first':
 			
 			var str = "I don't see " + this.char + " here.";
 			if( $.trim(text) == str ) {
 				if( this.options.log ) Log.add($p.addClass('error'));
 				this.state = 'fail';
-				return true;
+				return eRet.Partly;
 			}
 			
 			if( !Data.chars[this.id] )
 				Data.chars[this.id] = new Character(this.char);
 			
-				
+			if( !this.options.log ) {			
+				var html = this.id == Data.me
+					? '&lt;You just looked at yourself&gt;'
+					: '&lt;You just looked at <span class="name">' + this.char + '</span>&gt;';
+				Log.add( $(document.createElement('p')).addClass('looked').html( html) );
+			}
+			
 			Data.chars[this.id].desc = [];
 			rerun = 'desc';
 			break;
@@ -104,7 +94,7 @@ lookCharEvent.prototype.callback = function($p) {
 				if( this.options.log ) Log.add($p);
 				Data.chars[this.id].carries = [];
 				this.state = 'carries';
-				return true;
+				return eRet.Partly;
 			}
 			
 			if( this.id == Data.me ) {
@@ -112,44 +102,29 @@ lookCharEvent.prototype.callback = function($p) {
 					if( match[1].toLowerCase() == Data.me ) {
 						if( this.options.log ) {
 							$p
-								.html('&lt;You just looked at yourself&gt;')
+								.text('<You just looked at yourself>')
 								.addClass('looked');
 							Log.add($p);
 						}
 						
-						return true;							
+						return eRet.Partly;
 					}
 				}
 			}
-						
-			if (Event.isCode(text, this.endCode)) {
-				this.finish();
-				return;
-			}
-			
 			
 			if( this.options.log ) Log.add($p);
 			Data.chars[this.id].desc.push($p.text());	
-			return true;
+			return eRet.Partly;
 		
 		case 'carries':
-			if (Event.isCode(text, this.endCode)) {
-				this.finish();
-				return;
-			}
 			
 			if( this.options.log ) Log.add($p);
 			Data.chars[this.id].carries.push($p.text());	
-			return true;
+			return eRet.Partly;
 		
-		case 'fail':
-			if (Event.isCode(text, this.endCode)) {
-				this.finish();
-				return;
-			}
-			
+		case 'fail':			
 			if( this.options.log ) Log.add($p.addClass('error'));	
-			return true;
+			return eRet.Partly;
 		}
 			
 		if (rerun != false) {
