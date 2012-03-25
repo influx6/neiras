@@ -17,7 +17,8 @@ Loader = {
 	    'lookChar',
 	    'pose',
 	    'reset',
-	    'focus'
+	    'focus',
+	    'pageMail'
 	],
 	
 	// Loads all the events listed in eventLoader.events

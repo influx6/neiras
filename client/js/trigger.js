@@ -23,8 +23,8 @@ var Trigger = {
 			if ( Data.room.exits ) {
 			
 				if ( Data.room.exits[first_word] ) {
-					Event.append( new lookEvent() );
-					return msg;
+					Event.append( new lookEvent(), msg );
+					return;
 				}
 			}
 			

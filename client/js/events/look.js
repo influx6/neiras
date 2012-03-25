@@ -2,9 +2,7 @@
 Trigger.singleWord.home = function(msg) {
 	Event.append( new ignoreEvent(4) );
 	Log.add( $(document.createElement('p')).addClass('info').text('You wake up back at home') );
-	Event.append( new lookEvent() );
-	
-	return msg;		
+	Event.append( new lookEvent(), msg);
 };
 
 Trigger.singleWord.look = function(msg) {
@@ -37,6 +35,7 @@ lookEvent.prototype.ignore = [
 
 lookEvent.prototype.finish = function() {
 	Page.room.update();
+	Page.inRoom.update();
 	leftPanel.setActive('room');
 	
 	Event.append( new wsEvent(), 'ws' );
@@ -168,8 +167,8 @@ lookEvent.prototype.callback = function($p) {
 			// Server-messages are always last (I think).
 			if( text.match(/^#/) ) {
 				Event.prepend(this);
-				Page.inRoom.update();
 				if( this.options.connect ) {
+					Event.prepend( new pageMailEvent() );
 					Event.prepend( new wfEvent() );
 				}
 				Event.prepend( new serverMessageEvent() );
