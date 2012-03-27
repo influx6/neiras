@@ -8,22 +8,24 @@ poseEvent.prototype.callback = function($p) {
 	var pre = '';
 	var mid = '';
 	var post = '';
+	var legend = false;
 	
 	if( m = text.match(/In a page-pose to you, ([^ ,']+)(.*)$/) ) {
 		mode = ' page';
-		pre = '(Page) ';
+		legend = 'Page';
 	}
 	else if( m = text.match(/^([^ ]+) pages, "(.*)" to you.$/) ) {
 		mode = ' page';
 		mid = ' pages, "';
 		post = '" to you.';
+		legend = 'Page';
 	}
 	else if( m = text.match(/^([^ ]+) whispers, "(.*)" to you.$/) ) {
 		
 		mode = ' whisper';
+		legend = "Whisper";
 		
 		if( m[2].substr(0, m[1].length) == m[1] && m[2].substr(m[1].length,1).match(/[ ',]/) ) {
-			pre = '(Whisper) ';
 			m[2] = m[2].substr(m[1].length);
 			post = '';
 		}
@@ -60,8 +62,12 @@ poseEvent.prototype.callback = function($p) {
 			.text(pre)
 			.append($span)
 			.append( mid + m[2] + post )
-			.addClass('char_'+lc+mode);	
-				
+			.addClass('char_'+lc+mode)
+			.addClass('char');
+	
+		if( legend !== false ) {
+			$p = fieldset($p, legend);
+		}
 	}
 	
 	Log.add($p);

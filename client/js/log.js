@@ -31,19 +31,28 @@ var Log = {
 	
 	write: function(msg) {
 		
-		Log.atBottom = ((Log.$body.attr('scrollHeight') - Log.$body.scrollTop()) - Log.$iframe.outerHeight()) < 3;
-		
+		Log.setAtBottom();
 		Log.$body.append(msg);
 		
 		// If the scroll was at bottom, we want to keep it that way
+		Log.setScroll();
+	},
+	
+	setAtBottom: function() {
+		Log.atBottom = ((Log.$body.attr('scrollHeight') - Log.$body.scrollTop()) - Log.$iframe.outerHeight()) < 3;
+	},
+	
+	setScroll: function() {
 		if (Log.atBottom)
 			Log.$body.attr({ scrollTop: Log.$body.attr('scrollHeight') });
 	},
 	
 	add: function( $p ) {
 		
-		if ( $p.text().length > Log.charWidth ) {
+		if ( $.trim($p.text()).length > Log.charWidth ) {
 			$p.addClass('wrap');
+			if( $p.text().match(/^Aquila rules/) )
+				alert('['+$p.text()+']');
 		}
 		
 		Log.write($p);

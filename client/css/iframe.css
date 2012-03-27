@@ -6,7 +6,7 @@
 }
 
 body {
-	padding:0 0 0 11px;
+	padding:0 11px 0 11px;
 	margin:0;
 	background:#fff;
 	overflow-y:scroll;
@@ -18,16 +18,16 @@ body {
 
 p {
 	position:relative;
-	left:-11px;
-	padding:0 0 0 11px;
-	margin:0 -11px 0 0;
+	padding:0 0 0 0;
+	margin:0 0 0 0;
 	white-space:pre;
 }
 
-p.wrap {
+p.wrap
+ {
 	white-space:pre-wrap;
 	text-indent: -1.2em;
-	padding-left: 2.2em;	
+	padding-left: 1.2em;	
 }
 
 
@@ -55,12 +55,54 @@ p.wrap {
 	color: #20a000;
 }
 
-.focus, .focus.blue {
+.focus, .focus.blue, .focus.blue .legend, .focus .legend {
 	background-color: #e8e8ff;
 }
 
-.focus.red { background-color: #ffe8e8; }
+.focus.red, .focus.red .legend { background-color: #ffdcdc; }
 
-.focus.green { background-color: #e8ffe8; }
+.focus.green, .focus.green .legend { background-color: #c8f5c8; }
 
-.whisper, .page { font-style:italic }
+.legend {
+	position:absolute;
+	z-index:10;
+	top:-11px;
+	left: 1em;
+	padding-left:4px;
+	padding-right:4px;
+	background:url(../img/legend.png) #fff;
+	font-size:9px;
+	font-family: Arial;
+	color: #404040;
+	text-indent:0;
+}
+
+p.char {
+	margin-top:1px;
+	margin-bottom:1px;
+}
+
+p.focus {
+	left:-5px;
+	margin-right:-10px;
+	position:relative;
+	z-index:5;
+	padding-top:0;
+	padding-bottom:0;
+	border-width:3px;
+	border-image: url(../img/focus.png) 5 repeat;
+}
+
+p.fieldset {
+	left:-5px;
+	margin-top:6px;
+	margin-bottom:2px;
+	margin-right:-10px;
+	position:relative;
+	z-index:5;
+	border-width:5px;
+	padding-top:0;
+	padding-bottom:0;
+	-webkit-border-image: url(../img/fs.png) 5 repeat;
+	border-image: url(../img/fs.png) 5 repeat;
+}

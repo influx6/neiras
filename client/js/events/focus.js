@@ -16,13 +16,15 @@ Trigger.beginsWith.focus = function(msg) {
 			rm.splice(i, 1);
 		}
 		
-		
 		var elc = $(document.createElement('div')).text(lc).html();
+		Log.setAtBottom();
 		Log.$body.find('.char_'+elc).addClass(cl).removeClass(rm.join(' '));
-	
+		Log.setScroll();
+		
 		if( typeof Data.focus[lc] == 'undefined' )
 			Log.add($(document.createElement('p')).addClass('info').text('Added ' + m[1] + ' to focus'));
 
+		
 		Data.focus[lc] = i;
 
 	}
@@ -37,12 +39,16 @@ Trigger.beginsWith.unfocus = function(msg) {
 		var lc = m[1].toLowerCase();
 			
 		if( typeof Data.focus[lc] != 'undefined' ) {
+			
+			Log.setAtBottom();
 			var elc = $(document.createElement('div')).text(lc).html();
 			Log.$body.find('.char_'+elc).removeClass('focus ' + _focusColors.join(' '));
-			
+			Log.setScroll();
+				
 			delete Data.focus[lc];
 			
 			Log.add($(document.createElement('p')).addClass('info').text('Removed ' + m[1] + ' from focus'));	
+		
 		}
 	}
 	else {

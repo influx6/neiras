@@ -1,5 +1,11 @@
-Revision: 3
-Date: 2012-03-22
+Revision: 4
+Date: 2012-03-27
+
+Revision 4 (2012-03-27):
+Added a border around pages and whispers.
+Added rounded borders for focus colors.
+Added capture of unknown commands (unknownCmdEvent).
+
 
 Revision 3 (2012-03-22):
 Added alert window when leaving the page

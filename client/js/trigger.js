@@ -47,8 +47,9 @@ var Trigger = {
 				return ret; 
 		}
 				
-		// No alias match? Then we send the original message
-		return msg;
+		// No alias match? Then we send an unknownCmdEvent
+		Event.append( new unknownCmdEvent(), msg );
+		return;
 	},
 	
 	singleWord: {

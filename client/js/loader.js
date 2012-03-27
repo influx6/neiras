@@ -18,7 +18,8 @@ Loader = {
 	    'pose',
 	    'reset',
 	    'focus',
-	    'pageMail'
+	    'pageMail',
+	    'unknownCmd'
 	],
 	
 	// Loads all the events listed in eventLoader.events
