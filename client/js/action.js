@@ -2,12 +2,18 @@ var Action = {};
 
 Action.onSend = function( msg ) {
 	
-	Chat.history.push(msg);
-	Chat.historyPos = Chat.history.length;
+	Action.storeHistory(msg);
 	
 	msg = Trigger.parse(msg);
 	
 	return msg;
+};
+
+Action.storeHistory = function( msg ) {
+	
+	Chat.history.push(msg);
+	Chat.historyPos = Chat.history.length;
+	
 };
 
 

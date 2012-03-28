@@ -95,7 +95,7 @@ function keypressHandler(e) {
 	//	Complete.active = false;
 	
 	if (e.keyCode == '13') {
-		Chat.sendText();
+		Chat.sendText(e.shiftKey);
 		//$('#chat').contents().find('body:first').focus();
 		preventDefault(e);
 		return false;

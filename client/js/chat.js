@@ -45,23 +45,28 @@ var Chat = {
 	    }		
 	},
 
-	sendText: function() {
+	sendText: function(only_store) {
 		
 		var text = Chat.$body.text();
 		Chat.setText('');
 		
 		if (text == "") return;
 		
-		// Passing the text to the action triggers
-		if( Action.onSend )
+		if( only_store ) {
+			Action.storeHistory(text);			
+		}
+		else
+		{			
+			// Passing the text to the action triggers
 			text = Action.onSend(text);
-		
-		// Only passing on strings
-		if (typeof text == 'string') {			
-			try{
-				Socket.send(text);
-			} catch(exception){  
-				Log.write('<p class="warning"></p>');  
+			
+			// Only passing on strings
+			if (typeof text == 'string') {			
+				try{
+					Socket.send(text);
+				} catch(exception){  
+					Log.write('<p class="warning"></p>');  
+				}
 			}
 		}
 			
