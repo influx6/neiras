@@ -58,6 +58,9 @@ poseEvent.prototype.callback = function($p) {
 			$p.addClass(cl);
 		}
 		
+		if( typeof Data.ignore[lc] != 'undefined' )
+			$p.addClass('ignore');
+		
 		$p
 			.text(pre)
 			.append($span)

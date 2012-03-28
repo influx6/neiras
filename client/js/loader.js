@@ -19,7 +19,8 @@ Loader = {
 	    'reset',
 	    'focus',
 	    'pageMail',
-	    'unknownCmd'
+	    'unknownCmd',
+	    'ignoreChar'
 	],
 	
 	// Loads all the events listed in eventLoader.events

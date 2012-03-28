@@ -6,7 +6,7 @@
 }
 
 body {
-	padding:0 11px 0 11px;
+	padding:0 10px 0 11px;
 	margin:0;
 	background:#fff;
 	overflow-y:scroll;
@@ -49,6 +49,10 @@ p.wrap
 	margin-top: 0.5em;
 	margin-bottom: 0.5em;
 	color: #404040;
+}
+
+.ignore {
+	display:none;	
 }
 
 .looked .name {
