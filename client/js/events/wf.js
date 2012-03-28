@@ -5,6 +5,8 @@ Trigger.singleWord.wf =	function(msg) {
 	return msg;
 };
 
+Trigger.singleWord.watchfor = Trigger.singleWord.wf;
+
 function wfEvent() {}
 
 wfEvent.prototype.state = 'headers';
