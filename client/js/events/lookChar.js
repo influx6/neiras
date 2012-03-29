@@ -1,4 +1,4 @@
- var f_look = function(msg) {
+Trigger.beginsWith.look = function(msg) {
 	var match = msg.match(/^(look|l)\s+([^\s]+)$/);
 	
 	if (match == null)
@@ -10,8 +10,7 @@
 	Event.append( new lookCharEvent(match[2], {log:false}), msg );
 };
 
-Trigger.beginsWith.look = f_look;
-Trigger.beginsWith.l = f_look;
+Trigger.beginsWith.l = Trigger.beginsWith.look;
 
 
 // This trigger doesn't really belong in lookChar since it requires no parsing.

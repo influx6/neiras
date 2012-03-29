@@ -9,7 +9,20 @@ var Trigger = {
 		if (trimmed == "")
 			return msg;
 		
+		var first_char = trimmed.substring(0,1);
+		
+		// Check first char commands
+		if ( Trigger.firstChar[first_char] ) {
+			ret = Trigger.firstChar[first_char](msg);
+			
+			if (ret !== false)
+				return ret;
+		}
+		
 		var space_pos = trimmed.indexOf(' ');
+		
+		
+		
 		
 		var first_word = space_pos == -1
 			? trimmed.toLowerCase()
@@ -50,6 +63,9 @@ var Trigger = {
 		// No alias match? Then we send an unknownCmdEvent
 		Event.append( new unknownCmdEvent(), msg );
 		return;
+	},
+	
+	firstChar: {
 	},
 	
 	singleWord: {
