@@ -18,8 +18,15 @@ var Event = {
 	debug_last_event: null,
 	debug_odd: true,
 	
+	
 	// Adding new event to top of stack
 	append: function (event, msg) {
+		
+		Event.appended = true;
+		
+		if( !Log.parserActive )
+			return;
+			
 		Event.queue.push(event);
 		
 		if( msg ) {
@@ -201,9 +208,15 @@ var Event = {
 			var event;
 			do {
 				
-				if( Event.queue.length ==  0 )
-					Event.prepend(new idleEvent());
-			
+				if( Event.queue.length ==  0 ) {
+					if( Log.parserActive )
+						Event.prepend(new idleEvent());
+					else {
+						Log.add($p);
+						return;
+					}
+				}
+				
 				event = Event.queue.shift();
 				
 				if( DEBUG ) {

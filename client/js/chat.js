@@ -56,18 +56,41 @@ var Chat = {
 			Action.storeHistory(text);			
 		}
 		else
-		{			
-			// Passing the text to the action triggers
-			text = Action.onSend(text);
-			
-			// Only passing on strings
-			if (typeof text == 'string') {			
-				try{
-					Socket.send(text);
-				} catch(exception){  
-					Log.write('<p class="warning"></p>');  
+		{
+
+			if( Log.parserActive ) {
+				// Passing the text to the action triggers
+				text = Action.onSend(text);
+				
+				// Only passing on strings
+				if (typeof text == 'string') {			
+					try{
+						Socket.send(text);
+					} catch(exception){  
+						Log.write('<p class="warning"></p>');  
+					}
 				}
+				
+			} else {
+				Event.appended = false;
+				var stored_text = text;
+				// Passing the text to the action triggers
+				text = Action.onSend(text);
+				
+				if( Event.appended )
+					text = stored_text;
+								
+				// Only passing on strings
+				if (typeof text == 'string') {			
+					try{
+						Socket.send(text);
+					} catch(exception){  
+						Log.write('<p class="warning"></p>');  
+					}
+				}
+
 			}
+		
 		}
 			
 	}  

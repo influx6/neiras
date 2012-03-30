@@ -1,6 +1,7 @@
 var Log = {
 	atBottom: true,
 	charWidth: 80,
+	parserActive: true,
 	
 	$iframe: null,
 	$body: null,

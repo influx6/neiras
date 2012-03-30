@@ -59,6 +59,7 @@ lookCharEvent.prototype.callback = function($p) {
 	var rerun;
 	var match;
 	var text = $p.text();
+	var m;
 	
 	do {
 		rerun = false;
@@ -89,12 +90,19 @@ lookCharEvent.prototype.callback = function($p) {
 
 		case 'desc':
 			
+			
 			if( text.match(/^Carrying:$/) ) {
 				if( this.options.log ) Log.add($p);
 				Data.chars[this.id].carries = [];
 				this.state = 'carries';
 				return eRet.Partly;
 			}
+			
+			if( m = text.match(/^.*(https?:\/\/)/) ) {
+				rerun = 'image';
+				break;
+			}
+				
 			
 			if( this.id == Data.me ) {
 				if( match = text.match(/^<([^ ]+) just looked at you>$/) ) {
@@ -124,12 +132,57 @@ lookCharEvent.prototype.callback = function($p) {
 		case 'fail':			
 			if( this.options.log ) Log.add($p.addClass('error'));	
 			return eRet.Partly;
+		
+		case 'image':
+			//Picture: http://d.furaffinity.net/art/anisus/1183409260.anisus_wg.jpg (50,23:100,50)
+			var pos = text.indexOf(m[1]);
+
+			var charpairs = {'<':'>', '(':')', '[':']', '{':'}', '"':'"'};
+			
+			var char = null;
+			if( pos > 0 ) {
+				char = text.substr(pos-1, 1);
+				char = charpairs[char] ? charpairs[char] : null;
+				text = text.substr(pos);
+			}
+			
+			m = text.match(/^(https?:\/\/[^\s]*)(\s*\(([1-9][\d]*),([1-9][\d]*):([1-9][\d]*),([1-9][\d]*)\))?/);
+			// Cutting away the last char if needed
+			if( char && m[1].substr(m[1].length-1, 1) == char )
+				m[1] = substr(0,m[1].length-1);
+			
+			var image = {cx:0, cy:0, cw:0, ch:0, url:m[1]};
+			image.img = new Image();
+			image.img.src = m[1];
+			
+			image.img.onload = function() {
+				image.w = this.width;
+				image.h = this.height;
+				if( !m[2] ) {
+					image.cw = this.width;
+					image.ch = this.height;
+				}
+			};
+			
+			if( m[2] )
+			{
+				image.cx = parseInt(m[3]);
+				image.cy = parseInt(m[4]);
+				image.cw = parseInt(m[5]);
+				image.ch = parseInt(m[6]);
+			}
+			Data.chars[this.id].image = image;
+			
+			this.state = 'desc';
+			return eRet.Partly;
 		}
 			
 		if (rerun != false) {
 			this.state = rerun;
 			rerun = true;
 		}
+		
+		
 		
 	} while (rerun);
 };

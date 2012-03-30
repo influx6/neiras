@@ -10,6 +10,42 @@ function charPage(name, title, active) {
 	this.current = null;
 }
 
+function createImage(img, width, height) {
+	width = width || 100;
+	height = height || 100;
+	var $img = $(img.img);
+	var ratio = width/height;
+	var cx = img.cx;
+	var cy = img.cy;
+	var cw = img.cw;
+	var ch = img.ch;
+	var cr = cw/ch;
+	if( cr > ratio ) { ch = cw/ratio; cy -= parseInt((ch-img.ch) / 2); }
+	if( cr < ratio ) { cw = ratio*ch; cx -= parseInt((cw-img.cw) /2 ); }
+	if( cx+cw > img.w ) cx = img.w-cx-cw;
+	if( cy+ch > img.h ) cy = img.h-cy-ch;
+	
+	cr = width / cw; 
+	
+	$img
+		.width(Math.round(img.w * cr))
+		.height(Math.round(img.h * cr))
+		.css('left', Math.round(-cx*cr) )
+		.css('top', Math.round(-cy*cr) );
+	
+	var $div = $(document.createElement('a'))
+		.addClass('crop')
+		.css('width', width)
+		.css('height', height)
+		.attr('target', '_blank')
+		.attr('href', img.url)
+		.html($(document.createElement('div')).addClass('frame'))
+		.append($img);
+	
+	
+	return $div;
+}
+
 charPage.prototype.update = function(charid) {
 	
 	if( charid ) {
@@ -55,7 +91,17 @@ charPage.prototype.update = function(charid) {
 		.append($species)
 	);
 	
-	this.$div.empty()
+	var $image = null;
+	if( char.image ) {
+		$image = createImage(char.image);
+	}
+	
+	this.$div.empty();
+	
+	if( $image )
+		this.$div.append($image);
+	
+	this.$div
 		.append( $(document.createElement("table"))
 			.attr('cellspacing', 0)
 			.attr('cellpadding', 0)
@@ -68,7 +114,10 @@ charPage.prototype.update = function(charid) {
 	
 		var that = this;
 		$.each(char.desc, function(i, row) {
-			that.$div.append($(document.createElement('p')).text(row));
+			var $p = $(document.createElement('p')).text(row);
+			if( row.length > 39 )
+				$p.addClass('wrap');
+			that.$div.append($p);
 		});
 	}
 	

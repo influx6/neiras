@@ -24,7 +24,9 @@ function lookEvent(state, options) {
 	
 	if( this.options.connect ) {
 		this.finishCode = Event.generateCode();
-		Socket.send('tp ' + this.finishCode);
+		
+		if( Log.parserActive )
+			Socket.send('tp ' + this.finishCode);
 	}
 }
 

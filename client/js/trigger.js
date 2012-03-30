@@ -88,10 +88,32 @@ var Trigger = {
 				Log.$debug.toggle();
 			}
 		},
+		parse: function(msg) {
+			Log.parserActive = !Log.parserActive;
+			Log.add($(document.createElement('p')).addClass('info').text(
+				Log.parserActive ? 'Parser reactivated' : 'Parser deactivated'
+			));
+		}
 		
 	},
 	
 	beginsWith: {
-
+		parse: function(msg) {
+			var m;
+			if( m = msg.match(/^parse\s+(on|off)\s*$/i) ) {
+				m = $.trim(m[1]).toLowerCase();
+				
+				if( m == 'on' && !Log.parserActive ) {
+					Log.parserActive = true;
+					Log.add($(document.createElement('p')).addClass('info').text('Parser reactivated'));
+				}
+				else if( m == 'off' && Log.parserActive ) {
+					Log.parserActive = false;
+					Log.add($(document.createElement('p')).addClass('info').text('Parser deactivated'));
+				}
+			}
+			else
+				Log.add($(document.createElement('p')).addClass('info').text('Usage: parse [on|off]'));
+		}
 	}
 };
