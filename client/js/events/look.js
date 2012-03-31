@@ -170,8 +170,8 @@ lookEvent.prototype.callback = function($p) {
 			if( text.match(/^#/) ) {
 				Event.prepend(this);
 				if( this.options.connect ) {
-					Event.prepend( new pageMailEvent() );
 					Event.prepend( new wfEvent() );
+					Event.prepend( new pageMailEvent() );
 				}
 				Event.prepend( new serverMessageEvent() );
 				return eRet.Pass;

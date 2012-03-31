@@ -19,7 +19,7 @@ Trigger.beginsWith.show = function(msg) {
 	var match = msg.match(/^show\s+([^\s]+)$/);
 	
 	if (match == null) {
-		Log.add($(document.createElement('p')).addClass('info').text('Syntax: show [name]'));
+		Log.add($(document.createElement('p')).addClass('info').text('Usage: show [name]'));
 		return true;
 	}
 	
@@ -78,10 +78,17 @@ lookCharEvent.prototype.callback = function($p) {
 				Data.chars[this.id] = new Character(this.char);
 			
 			if( !this.options.log ) {			
-				var html = this.id == Data.me
-					? '&lt;You just looked at yourself&gt;'
-					: '&lt;You just looked at <span class="name">' + this.char + '</span>&gt;';
-				Log.add( $(document.createElement('p')).addClass('looked').html( html) );
+				var $h = $(document.createElement('p'))
+					.addClass('looked');
+				if( this.id == Data.me )
+					$h.html('&lt;You just looked at yourself&gt;');
+				else
+					$h.html('&lt;You just looked at ')
+						.append($(document.createElement('span'))
+							.addClass('name')
+							.text(this.char))
+						.append('&gt;');
+				Log.add( $h );
 			}
 			
 			Data.chars[this.id].desc = [];

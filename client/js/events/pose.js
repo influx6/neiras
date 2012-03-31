@@ -171,7 +171,7 @@ poseEvent.prototype.callback = function($p) {
 			$p
 				.text(pre)
 				.append($span)
-				.append( mid + m[2] + post );
+				.append( document.createTextNode(mid + m[2] + post) );
 		
 			this.addPose(mode, lc, $p);
 		}
@@ -197,7 +197,7 @@ poseEvent.prototype.callback = function($p) {
 
 	$p
 		.html($me)
-		.append(pre);
+		.append(document.createTextNode(pre));
 	
 	if( mid ) {
 		$name = $(document.createElement('span'))
@@ -208,7 +208,7 @@ poseEvent.prototype.callback = function($p) {
 	}
 		
 	if( post )
-		$p.append(post);
+		$p.append(document.createTextNode(post));
 	
 	this.addPose(mode, Data.me, $p);
 		

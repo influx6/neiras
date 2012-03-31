@@ -8,8 +8,7 @@ pageMailEvent.prototype.callback = function($p) {
 	
 	switch(this.state) {
 	case 'start':
-		
-		if( !text.match(/^You sense that you have ([1-9][0-9]+) page-mail messages waiting\.$/m) )
+		if( !text.match(/^You sense that you have (([1-9][0-9]+) page-mail messages|a page-mail message) waiting\.$/m) )
 			return eRet.Pass;
 		
 		Log.add($p.addClass('info'));
@@ -19,7 +18,7 @@ pageMailEvent.prototype.callback = function($p) {
 	
 	case 'post':
 		
-		if( !text.match(/^You can read your mail/) )
+		if( !text.match(/^You can read your/) )
 			return eRet.Pass;
 		
 		Log.add($p.addClass('info'));

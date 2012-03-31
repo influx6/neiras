@@ -47,7 +47,10 @@ var Chat = {
 
 	sendText: function(only_store) {
 		
+		Chat.$body.find('br').replaceWith(' ');
 		var text = Chat.$body.text();
+		text = text.replace(/(\r\n|\n|\r)/gm, ' ');
+		
 		Chat.setText('');
 		
 		if (text == "") return;

@@ -41,8 +41,9 @@ var Socket = {
 	},
 	
 	send: function(msg) {
-		if( Socket.connected )
-			Socket.io.send(msg+Socket.EOL);
+		if( Socket.connected ) {
+			Socket.io.send(msg.toString()+Socket.EOL);
+		}
 	}
 		
 };

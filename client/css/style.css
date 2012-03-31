@@ -1,7 +1,7 @@
 @CHARSET "ISO-8859-1";
 @font-face {
     font-family: DejaVu;
-    src: url(DejaVuSansMono.ttf);
+    src: url(DejaVuSansMono.ttf) format('truetype');
     font-weight:400;
 }
 

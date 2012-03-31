@@ -70,6 +70,12 @@ http.createServer(function (request, response) {
         case '.css':
             contentType = 'text/css';
             break;
+        case '.png':
+            contentType = 'image/png';
+            break;
+        case '.ttf':
+            contentType = 'font/ttf';
+            break;
     }
      
     path.exists(filePath, function(exists) {
