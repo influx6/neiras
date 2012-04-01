@@ -105,6 +105,7 @@ wsEvent.prototype.callback = function($p) {
 			idle = 'sleep';
 		}
 		
+		char.name	= name;
 		char.idle	= idle;
 		char.sex	= $.trim(text.substr(22,9));
 		char.species= $.trim(text.substr(32));

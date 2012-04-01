@@ -46,6 +46,19 @@ function createImage(img, width, height) {
 	return $div;
 }
 
+Page.updateCharImage = function(char) {
+	var $img = $('#charimage_'+char);
+	var image = Data.chars[char].image;
+	
+	// If the image is not in display
+	// or if the character doesn't have an image, lets leave
+	if( !$img || !image ) return;
+	
+	var $newimg = createImage(image);
+	$newimg.attr('id', 'charimage_'+char);
+	$img.replaceWith($newimg);
+};
+
 charPage.prototype.update = function(charid) {
 	
 	if( charid ) {
@@ -99,7 +112,7 @@ charPage.prototype.update = function(charid) {
 	this.$div.empty();
 	
 	if( $image )
-		this.$div.append($image);
+		this.$div.append($image.attr('id', 'charimage_'+this.current));
 	
 	this.$div
 		.append( $(document.createElement("table"))

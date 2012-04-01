@@ -159,6 +159,7 @@ lookCharEvent.prototype.callback = function($p) {
 				m[1] = substr(0,m[1].length-1);
 			
 			var image = {cx:0, cy:0, cw:0, ch:0, url:m[1]};
+			char = this.id;
 			image.img = new Image();
 			image.img.src = m[1];
 			
@@ -169,6 +170,7 @@ lookCharEvent.prototype.callback = function($p) {
 					image.cw = this.width;
 					image.ch = this.height;
 				}
+				Page.updateCharImage(char);
 			};
 			
 			if( m[2] )

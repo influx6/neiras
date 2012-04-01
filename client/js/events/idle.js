@@ -8,10 +8,12 @@ idleEvent.prototype.callback = function($p) {
 	// This is only if we are connected with a character
 	if (Data.connected) {
 		if ( m = text.match(/^<([^ ]+) just looked at you>$/m) ) {
-			$p
-				.html('&lt;<span class="name">')
-				.append(document.createTextNode(m[1]))
-				.append('</span> just looked at you&gt;')
+			var $span = $(document.createElement('span'))
+				.text(m[1])
+				.addClass('name');
+			$p	.text('<')
+				.append($span)
+				.append(document.createTextNode(' just looked at you>'))
 				.addClass('looked');
 			Log.add($p);
 			return eRet.Complete;

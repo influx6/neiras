@@ -12,6 +12,7 @@ Trigger.beginsWith.whisper = function(msg) {
 };
 Trigger.beginsWith.w = Trigger.beginsWith.whisper;
 
+// Page triggers
 Trigger.beginsWith.page = function(msg) {
 	var m = msg.match(/^(p|page)[^=]*=\s*(:?)/i);
 	
@@ -26,14 +27,23 @@ Trigger.beginsWith.page = function(msg) {
 };
 Trigger.beginsWith.p = Trigger.beginsWith.page;
 
-Trigger.firstChar[':'] = function(msg) {
-	var m;
-	if( !(m = msg.match(/^(.)./)) )
+// Pose triggers
+Trigger.beginsWith.pose = function(msg) {
+	if( !msg.match(/^(:|pose\s)./) )
 		return false;
 	
-	Event.append(new poseEvent(m[1]==':' ? 'default' : 'say'), msg);
+	Event.append(new poseEvent('default'), msg);
 };
-Trigger.firstChar['"'] = Trigger.firstChar[':'];
+Trigger.firstChar[':'] = Trigger.beginsWith.pose;
+
+// Say triggers
+Trigger.beginsWith.say = function(msg) {
+	if( !msg.match(/^("|say\s)./) )
+		return false;
+	
+	Event.append(new poseEvent('say'), msg);
+};
+Trigger.firstChar['"'] = Trigger.beginsWith.say;
 
 function poseEvent(state) {
 	this.state = state || 'default';
