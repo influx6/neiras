@@ -85,6 +85,11 @@ poseEvent.prototype.addPose = function(mode, char, $p) {
 	if( typeof Data.ignore[char] != 'undefined' )
 		$p.addClass('ignore');
 	
+	if( typeof Data.notify[char] != 'undefined' ) {
+		if (window.chrome) Data.notify[char] = new Audio('js/notify2.ogg');
+		Data.notify[char].play();
+	}
+	
 	if( legend !== false ) {
 		$p = fieldset($p, legend);
 	}	

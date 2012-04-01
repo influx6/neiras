@@ -89,22 +89,7 @@ function enableDesignMode(iframe) {
     return false;
 }
 
-function keypressHandler(e) {
-	// Deactivating tab completion
-	//if( e.keyCode != 9 ) // Tab
-	//	Complete.active = false;
-	
-	if (e.keyCode == '13') {
-		Chat.sendText(e.shiftKey);
-		//$('#chat').contents().find('body:first').focus();
-		preventDefault(e);
-		return false;
-	} //else if( e.keyCode == 9) { // Tab
-	//	Action.onComplete();
-    //	preventDefault(e);
-    //	return false;
-    //}
-}
+function keypressHandler(e) { }
 
 function keydownHandler(e) {
 	var keyCode;
@@ -114,6 +99,13 @@ function keydownHandler(e) {
 		keyCode = e.which;
 	} else {
 		keyCode = e.keyCode;
+	}
+	
+	if( keyCode == 13 ) {
+		Chat.sendText(e.ctrlKey);
+		//$('#chat').contents().find('body:first').focus();
+		preventDefault(e);
+		return false;
 	}
 	
 	// Deactivating tab completion

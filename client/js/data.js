@@ -5,6 +5,7 @@ function Character(name) { this.name = name; }
 var Data = {
 	room: {},
 	chars: {},
-	focus: [],
-	ignore: []
+	focus: {},
+	ignore: {},
+	notify: {}
 };

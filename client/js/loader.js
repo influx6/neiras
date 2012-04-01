@@ -1,4 +1,3 @@
-
 Loader = {
 
 	// path to the events-folder
@@ -20,7 +19,8 @@ Loader = {
 	    'focus',
 	    'pageMail',
 	    'unknownCmd',
-	    'ignoreChar'
+	    'ignoreChar',
+	    'notify'
 	],
 	
 	// Loads all the events listed in eventLoader.events
