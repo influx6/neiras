@@ -23,7 +23,7 @@ Trigger.beginsWith.unnotify = function(msg) {
 		var lc = m[1].toLowerCase();
 			
 		if( typeof Data.notify[lc] != 'undefined' ) {
-			delete Data.focus[lc];
+			delete Data.notify[lc];
 			
 			Log.add($(document.createElement('p')).addClass('info').text('Removed ' + m[1] + ' from sound notification'));	
 		
