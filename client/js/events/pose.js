@@ -86,8 +86,12 @@ poseEvent.prototype.addPose = function(mode, char, $p) {
 		$p.addClass('ignore');
 	
 	if( typeof Data.notify[char] != 'undefined' ) {
-		if (window.chrome) Data.notify[char] = new Audio('js/notify2.ogg');
-		Data.notify[char].play();
+		var audio = document.getElementById('audio_notify');
+		if (window.chrome) {
+			audio.load();			
+		}
+		audio.play();
+		//Data.notify[char].play();
 	}
 	
 	if( legend !== false ) {
