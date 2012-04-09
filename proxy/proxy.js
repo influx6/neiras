@@ -76,6 +76,9 @@ http.createServer(function (request, response) {
         case '.ttf':
             contentType = 'font/ttf';
             break;
+        case '.ico':
+        	contentType = 'image/vnd.microsoft.icon';
+        	break;
     }
      
     path.exists(filePath, function(exists) {
