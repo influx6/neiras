@@ -23,3 +23,20 @@ function setLayout(name) {
 	if( Log.$iframe )
 		Log.$iframe.contents().find('link[rel=stylesheet]').attr({href : "css/" + Log.css + name});
 }
+
+
+Trigger.beginsWith.layout = function(msg) {
+	var m;
+	if( m = msg.match(/^layout\s+([^\s]+)$/i) ) {
+	
+		var lc = m[1].toLowerCase();
+		if( lc == 'default' || lc == 'white' )
+			lc = null;
+		
+		setLayout(lc);
+
+		Log.add($(document.createElement('p')).addClass('info').text('Set layout to ' + m[1]));
+	}
+	
+	return true;
+};
