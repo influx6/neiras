@@ -1,0 +1,115 @@
+@CHARSET "ISO-8859-1";
+@font-face {
+    font-family: DejaVu;
+    src: url(DejaVuSansMono.ttf);
+    font-weight:400;
+}
+
+body {
+	padding:0 10px 0 11px;
+	margin:0;
+	background:#000;
+	overflow-y:scroll;
+	overflow-x:hidden;
+	font-family: DejaVu, "Courier New", Courier, monospace;
+	font-size: 10pt;
+	color:#c0c0c0;
+}
+
+
+p {
+	position:relative;
+	padding:0 0 0 0;
+	margin:0 0 0 0;
+	white-space:pre;	
+}
+
+p.wrap
+ {
+	white-space:pre-wrap;
+	text-indent: -1.2em;
+	padding-left: 1.2em;	
+}
+
+
+.room_name {
+	margin-top: 0.5em;
+	font-weight:bold;
+	color: #9bb4f0;
+}
+
+.server_message {
+	color: #404040;
+}
+
+.error {
+	color: red;
+}
+
+.info, .looked {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+	color: #c0c0c0;
+}
+
+.ignore {
+	display:none;	
+}
+
+.looked .name {
+	color: #135e00;
+}
+
+.focus, .focus.blue, .focus.blue .legend, .focus .legend {
+	background-color: #202050;
+}
+
+.focus.red, .focus.red .legend { background-color: #640000; }
+
+.focus.green, .focus.green .legend { background-color: #004000; }
+
+.legend {
+	position:absolute;
+	z-index:10;
+	top:-11px;
+	left: 1em;
+	padding-left:4px;
+	padding-right:4px;
+	background:url(../img/legend_black.png) #000;
+	font-size:9px;
+	font-family: Arial;
+	color: #c0c0c0;
+	text-indent:0;
+}
+
+p.char {
+	margin-top:1px;
+	margin-bottom:1px;
+}
+
+.name { color: #3d3d8f }
+
+p.focus {
+	left:-5px;
+	margin-right:-10px;
+	position:relative;
+	z-index:5;
+	padding-top:0;
+	padding-bottom:0;
+	border-width:3px;
+	border-image: url(../img/focus_black.png) 5 repeat;
+}
+
+p.fieldset {
+	left:-5px;
+	margin-top:6px;
+	margin-bottom:2px;
+	margin-right:-10px;
+	position:relative;
+	z-index:5;
+	border-width:5px;
+	padding-top:0;
+	padding-bottom:0;
+	-webkit-border-image: url(../img/fs_black.png) 5 repeat;
+	border-image: url(../img/fs_black.png) 5 repeat;
+}

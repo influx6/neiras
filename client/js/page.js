@@ -39,7 +39,7 @@ function createImage(img, width, height) {
 		.css('height', height)
 		.attr('target', '_blank')
 		.attr('href', img.url)
-		.html($(document.createElement('div')).addClass('frame'))
+		.html($(document.createElement('div')).addClass('round'))
 		.append($img);
 	
 	

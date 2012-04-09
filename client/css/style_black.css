@@ -9,7 +9,8 @@ body {
 	margin:0 0;
 	padding:0 0;
 	height:100%;
-	background:#f1f1f1;
+	background:#303030;
+	color: #c0c0c0;
     font-family: Arial, Helvetica, sans-serif;
 }
 table, td, tr {
@@ -73,7 +74,7 @@ table, td, tr {
 	width: 119px;
 	height: 41px;
 	z-index:128;
-	background: url(../img/neiras.png) no-repeat;
+	background: url(../img/neiras_black.png) no-repeat;
 }
 
 #mainCol {
@@ -100,8 +101,9 @@ table, td, tr {
 	width:100%;
 	height:100%;
 	border-width:8px;
-	-webkit-border-image: url(../img/border.png) 8 repeat;
-	border-image: url(../img/border.png) 8 repeat;	
+	-webkit-border-image: url(../img/border_black.png) 8 repeat;
+	border-image: url(../img/border_black.png) 8 repeat;
+	background:#000;
 }
 
 .round {
@@ -114,8 +116,8 @@ table, td, tr {
 	width:100%;
 	height:100%;
 	border-width:8px;
-	-webkit-border-image: url(../img/focus.png) 8 repeat;
-	border-image: url(../img/focus.png) 8 repeat;	
+	-webkit-border-image: url(../img/focus_black.png) 8 repeat;
+	border-image: url(../img/focus_black.png) 8 repeat;	
 }
 
 .box .c {
@@ -124,10 +126,10 @@ table, td, tr {
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
 	position:relative;
-	z-index:20;
+	z-index:30;
 	width:100%;
 	height:100%;
-	padding:8px 1px 8px 1px;
+	padding:8px 1px 8px 1px;	
 }
 
 
@@ -208,22 +210,22 @@ table, td, tr {
 }
 .tabs td.active div {color:#104088;}
 .tabs td.active div:hover {cursor:pointer; color:#124796}
-.tabs .f  {width:auto; height:25px; border-bottom:solid 1px #cdcdcd; border-top:solid 1px #ffffff; background:#fff; vertical-align:bottom}
-.tabs .b  {width:auto; height:25px; border-bottom:solid 1px #c3c3c3; border-top:solid 1px #cdcdcd; background:#f3f3f3; vertical-align:bottom}
-.tabs .a  {width:auto; height:25px; border-bottom:solid 1px #c8c8c8; border-top:solid 1px #cdcdcd; background:#f9f9f9; vertical-align:bottom}
-.tabs .nf {width:19px; height:27px; background:url(../img/sp_tab.png) 0px bottom no-repeat}
-.tabs .nb {width:19px; height:27px; background:url(../img/sp_tab.png) -19px bottom no-repeat}
-.tabs .na {width:19px; height:27px; background:url(../img/sp_tab.png) -38px bottom no-repeat}
-.tabs .fb {width:19px; height:27px; background:url(../img/sp_tab.png) -57px bottom no-repeat}
-.tabs .fa {width:19px; height:27px; background:url(../img/sp_tab.png) -76px bottom no-repeat}
-.tabs .bf {width:19px; height:27px; background:url(../img/sp_tab.png) -95px bottom no-repeat}
-.tabs .bb {width:19px; height:27px; background:url(../img/sp_tab.png) -114px bottom no-repeat}
-.tabs .ba {width:19px; height:27px; background:url(../img/sp_tab.png) -133px bottom no-repeat}
-.tabs .af {width:19px; height:27px; background:url(../img/sp_tab.png) -152px bottom no-repeat}
-.tabs .ab {width:19px; height:27px; background:url(../img/sp_tab.png) -171px bottom no-repeat}
-.tabs .fn {width:19px; height:27px; background:url(../img/sp_tab.png) -190px bottom no-repeat}
-.tabs .bn {width:19px; height:27px; background:url(../img/sp_tab.png) -209px bottom no-repeat}
-.tabs .an {width:19px; height:27px; background:url(../img/sp_tab.png) -228px bottom no-repeat}
+.tabs .f  {width:auto; height:25px; border-bottom:solid 1px #505050; border-top:solid 1px #000; background:#000; vertical-align:bottom}
+.tabs .b  {width:auto; height:25px; border-bottom:solid 1px #3c3c3c; border-top:solid 1px #505050; background:#0c0c0c; vertical-align:bottom}
+.tabs .a  {width:auto; height:25px; border-bottom:solid 1px #373737; border-top:solid 1px #505050; background:#060606; vertical-align:bottom}
+.tabs .nf {width:19px; height:27px; background:url(../img/sp_tab_black.png) 0px bottom no-repeat}
+.tabs .nb {width:19px; height:27px; background:url(../img/sp_tab_black.png) -19px bottom no-repeat}
+.tabs .na {width:19px; height:27px; background:url(../img/sp_tab_black.png) -38px bottom no-repeat}
+.tabs .fb {width:19px; height:27px; background:url(../img/sp_tab_black.png) -57px bottom no-repeat}
+.tabs .fa {width:19px; height:27px; background:url(../img/sp_tab_black.png) -76px bottom no-repeat}
+.tabs .bf {width:19px; height:27px; background:url(../img/sp_tab_black.png) -95px bottom no-repeat}
+.tabs .bb {width:19px; height:27px; background:url(../img/sp_tab_black.png) -114px bottom no-repeat}
+.tabs .ba {width:19px; height:27px; background:url(../img/sp_tab_black.png) -133px bottom no-repeat}
+.tabs .af {width:19px; height:27px; background:url(../img/sp_tab_black.png) -152px bottom no-repeat}
+.tabs .ab {width:19px; height:27px; background:url(../img/sp_tab_black.png) -171px bottom no-repeat}
+.tabs .fn {width:19px; height:27px; background:url(../img/sp_tab_black.png) -190px bottom no-repeat}
+.tabs .bn {width:19px; height:27px; background:url(../img/sp_tab_black.png) -209px bottom no-repeat}
+.tabs .an {width:19px; height:27px; background:url(../img/sp_tab_black.png) -228px bottom no-repeat}
 	
 
 .event {  
@@ -259,6 +261,7 @@ table, td, tr {
 	font-weight: bold;
 	margin-top: 8px;
 	margin-bottom: 6px;
+	color: #9bb4f0;
 	clear:left;
 }
 
@@ -276,6 +279,7 @@ p.wrap {
 
 .panel table.contents thead th {
 	font-family: Arial, Helvetica, sans-serif;
+	color: #9bb4f0;
 	font-size:14px;
 	padding-bottom:3px;
 	border-bottom: 1px solid black;
@@ -287,23 +291,23 @@ p.wrap {
 }
 
 .panel table.contents tr.odd td {
-	background-color: #e8e8ff; /*#f0f0fa;*/
+	background-color: #000040; /*#f0f0fa;*/
 }
 
 .panel table.contents tr.sleeping {
-	color: #aaaaaa;	
+	color: #404040	
 }
 
 .panel table.contents tr.idle0 {
-	color: #303070;
+	color: #6b6bf9;
 }
 
 .panel table.contents tr.idle10 {
-	color: #901838;
+	color: #d46bf9;
 }
 
 .panel table.contents tr.idle30 {
-	color: #d00000;
+	color: #ff3232;
 }
 
 .panel table.def {
@@ -316,13 +320,14 @@ p.wrap {
 
 .panel table.def th, .panel table.def td {
 	padding:2px 8px 2px 8px;
-	border-bottom: 2px solid #fff;
+	border-bottom: 2px solid #000;
 }
 
 .panel table.def th {
 	text-align:right;
 	width:40%;
 	background-color: #f0f0fa;
+	color:#000;
 }
 
 
@@ -384,7 +389,7 @@ p.wrap {
 	width:100%;
 	height:100%;
 	border-width:5px;
-	border-image: url(../img/focus.png) 5 repeat;
+	border-image: url(../img/focus_black.png) 5 repeat;
 }
 
 .crop img {

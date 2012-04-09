@@ -182,6 +182,9 @@ lookCharEvent.prototype.callback = function($p) {
 			}
 			Data.chars[this.id].image = image;
 			
+			if( this.options.log ) Log.add($p);
+			Data.chars[this.id].desc.push($p.text());	
+			
 			this.state = 'desc';
 			return eRet.Partly;
 		}

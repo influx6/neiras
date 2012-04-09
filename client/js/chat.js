@@ -5,10 +5,15 @@ var Chat = {
 	
 	$iframe: null,
 	$body: null,
+	css: 'iframe',
 	
-	init: function() {	
+	init: function() {
+		var css = Chat.css;
+		if( currentLayout )
+			css += '_'+currentLayout;
+		
 		makeIframe( 'chat', {
-			css: 'iframe.css',
+			css: css+'.css',
 			designMode: true}
 		);
 		

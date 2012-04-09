@@ -5,12 +5,17 @@ var Log = {
 	
 	$iframe: null,
 	$body: null,
+	css: 'iframe',
 	
 	incompleteLine: '',
 	
-	init: function() {	
+	init: function() {
+		var css = Log.css;
+		if( currentLayout )
+			css += '_'+currentLayout;
+		
 		makeIframe( 'log', {
-			css: 'iframe.css',
+			css: css + '.css',
 			designMode: false
 		});
 		
